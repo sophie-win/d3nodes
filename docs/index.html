@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <title>neo4jd3.js</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/neo4jd3.min.css?v=0.0.1">
+    <style>
+        body,
+        html,
+        .neo4jd3 {
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<p id="return_data">hello</p>
+<div id="neo4jd3"></div>
+<a href="https://github.com/eisman/neo4jd3"><img
+        style="cursor: pointer; position: absolute; top: 0; right: 0; border: 0;" src="img/forkme_right_gray_6d6d6d.png"
+        alt="Fork me on GitHub" data-canonical-src="img/forkme_right_gray_6d6d6d.png"></a>
+
+<!-- Scripts -->
+<script src="js/d3.min.js"></script>
+<script src="js/neo4jd3.js?v=0.0.1"></script>
+<script type="text/javascript">
+    function init() {
+        var neo4jd3 = new Neo4jd3('#neo4jd3', {
+            highlight: [
+                {
+                    class: 'Project',
+                    property: 'name',
+                    value: 'neo4jd3'
+                }, {
+                    class: 'User',
+                    property: 'userId',
+                    value: 'eisman'
+                }
+            ],
+            icons: {
+// //                        'Address': 'home',
+//                         'Api': 'gear',
+// //                        'BirthDate': 'birthday-cake',
+// //                         'Cookie': 'paw',
+// //                        'CreditCard': 'credit-card',
+// //                        'Device': 'laptop',
+//                         'Email': 'at',
+//                         'Git': 'git',
+//                         'Github': 'github',
+//                         'Google': 'google',
+// //                        'icons': 'font-awesome',
+//                         'Ip': 'map-marker',
+//                         'Issues': 'exclamation-circle',
+//                         'Language': 'language',
+//                         'Options': 'sliders',
+//                         'Password': 'lock',
+//                         'Phone': 'phone',
+//                         'Project': 'folder-open',
+//                         'SecurityChallengeAnswer': 'commenting',
+//                         'User': 'user',
+//                         'zoomFit': 'arrows-alt',
+//                         'zoomIn': 'search-plus',
+//                         'zoomOut': 'search-minus'
+            },
+            images: {
+                'Address': 'Apple',
+//                        'Api': 'img/twemoji/1f527.svg',
+                'BirthDate': 'Apple',
+
+//                        'zoomFit': 'img/twemoji/2194.svg',
+//                        'zoomIn': 'img/twemoji/1f50d.svg',
+//                        'zoomOut': 'img/twemoji/1f50e.svg'
+            },
+            text: {
+                'Cookie': "HELLO",
+            },
+            minCollision: 60,
+            neo4jDataUrl: 'json/neo4jData.json',
+            nodeRadius: 25,
+            onNodeDoubleClick: function (node) {
+                switch (node.id) {
+                    case '25':
+                        // Google
+                        window.open(node.properties.url, '_blank');
+                        break;
+                    default:
+                        // var maxNodes = 5,
+                        //     data = neo4jd3.randomD3Data(node, maxNodes);
+                        // neo4jd3.updateWithD3Data(data);
+                        // var dd = {
+                        //     "results": [{
+                        //         "data": [{
+                        //             "graph": {
+                        //                 "relationships": [
+                        //                 {
+                        //                     "startNode": node.id,
+                        //                     "id": 1234,
+                        //                     "type": "OWNS",
+                        //                     "endNode": 9
+                        //                 }],
+                        //                 "nodes": [{
+                        //                     "id": node.id,
+                        //                     "labels": [node.labels],
+                        //                     "properties": node.properties
+                        //                 }, {
+                        //                     "id": "9",
+                        //                     "type": "ISSUES",
+                        //                     "startNode": "8",
+                        //                     "endNode": "10",
+                        //                     "properties": {}
+                        //                 }]
+                        //             }
+                        //         }]
+                        //     }]
+                        // };
+
+                        // var dd = {
+                        //     "nodes": [
+                        //         {
+                        //             "id": 456,
+                        //             "labels": [
+                        //                 "Publication"
+                        //             ],
+                        //             "properties": {
+                        //                 "name": "Affordances for Sharing Domain-Specific and Complex Knowledge on Enterprise Social Media.",
+                        //                 "name_abbr": "Affordan..",
+                        //                 "labels": [
+                        //                     "Publication"
+                        //                 ]
+                        //             }
+                        //         }
+                        //     ],
+                        //     "relationships": [
+                        //         {
+                        //             "startNode": "21",
+                        //             "id": "21100",
+                        //             "type": "OWNS",
+                        //             "endNode": 456,
+                        //             "source": "21",
+                        //             "target": 456,
+                        //             "linknum": 1
+                        //         }
+                        //     ]
+                        // };
+
+                        var dd = {
+                            "results": [{
+                                "data": [{
+                                    "graph": {
+                                        "relationships": [{
+                                            "startNode": node.id,
+                                            "id": node.id + 100,
+                                            "type": "OWNS",
+                                            "endNode": 456
+                                        }],
+                                        "nodes": [{
+                                            "id": node.id,
+                                            "labels": [node.labels],
+                                            "properties": node.properties
+                                        }, {
+                                            "id": 456,
+                                            "labels": ["Publication"],
+                                            "properties": {
+                                                "name": "Affordances for Sharing Domain-Specific",
+                                            }
+                                        }]
+                                    }
+                                }]
+                            }]
+                        };
+                        data = neo4jd3.neo4jDataToD3Data(dd)
+                        // data = neo4jd3.randomD3Data(node, 5)
+                        nodes = data.nodes
+                        for (var i = 0; i < nodes.length; i++) {
+                            // look for the entry with a matching `code` value
+                            if (nodes[i].id == node.id) {
+                                // we found its
+                                // obj[i].name is the matched result
+
+                                delete nodes[i]
+                            }
+                        }
+                        var j = JSON.stringify(data, (k, v) => Array.isArray(v)
+                        && !(v = v.filter(e => e)).length ? void 0 : v, 2);
+
+                        // document.getElementById("return_data").innerText = j
+                        neo4jd3.updateWithD3Data(JSON.parse(j))
+                        break;
+                }
+            },
+            onRelationshipDoubleClick: function (relationship) {
+                console.log('double click on relationship: ' + JSON.stringify(relationship));
+            },
+            zoomFit: true
+        });
+    }
+
+    window.onload = init;
+</script>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-430863-29', 'auto');
+    ga('send', 'pageview');
+</script>
+</body>
+</html>
